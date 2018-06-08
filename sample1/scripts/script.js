@@ -19,21 +19,14 @@ const mouthZDist = mouth0.z.sub(mouth1.z);
 const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).add(mouthZDist.pow(2)).pow(0.5);
 
 Time.ms.monitor().subscribe(function () {
-Diagnostics.log( + distance.lastValue);
+if(distance.lastValue < 30) {    
+    Diagnostics.log("KISS Dist: " + distance.lastValue);
+}else{
+    Diagnostics.log("Friend Zone: " + distance.lastValue);
+}
 });
 
+distance.lt(30).onOn().subscribe(function () {
+Diagnostics.log("KISS!!!");
+});
 
-
-//
-// Example script
-//
-// Loading required modules
-// var Scene = require('Scene');
-// var FaceTracking = require('FaceTracking');
-//
-// Binding an object's property to a value provided by the face tracker
-// Scene.root.child('object0').transform.rotationY = FaceTracking.face(0).transform.rotationX;
-//
-// If you want to log objects, use the Diagnostics module.
-// var Diagnostics = require('Diagnostics');
-// Diagnostics.log(Scene.root);
