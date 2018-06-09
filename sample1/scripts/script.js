@@ -23,6 +23,21 @@ const cloudface1 = Scene.root.find('cloud_face1');
 const heartEmitter = Scene.root.find('heartEmitter');
 const likesEmitter = Scene.root.find('likesEmitter');
 
+const daystillparade = Scene.root.find('text0');
+
+function DayDiff(CurrentDate)
+{
+	var TYear=CurrentDate.getFullYear();
+        var TDay=new Date("July, 7, 2018");
+        TDay.getFullYear(TYear);
+        var DayCount=(TDay-CurrentDate)/(1000*60*60*24);
+        DayCount=Math.round(DayCount); 
+    return(DayCount);
+}
+
+var Today = new Date(); 
+daystillparade.text = DayDiff(Today) + ' days untill the parade.';
+
 const mouthXDist = mouth0.x.sub(mouth1.x);
 const mouthYDist = mouth0.y.sub(mouth1.y);
 const mouthZDist = mouth0.z.sub(mouth1.z);
@@ -42,7 +57,7 @@ function Rainbow() {
         context.trackDistance(context); 
         context.countFace(context);
         context.firingHeart(context,context.heartEDriver, context.heartESampler, context.faceSignalY, context.faceSignalY2);
-        heartEmitter.hidden = true;
+        heartEmitter.hidden = daystillparade.hidden = cloudface0.hidden = cloudface1.hidden = true;
         likesEmitter.hidden = false;
     }
 
@@ -75,7 +90,7 @@ function Rainbow() {
             heartEmitter.birthrate = 7;
             heartEmitter.hidden = false;
             likesEmitter.hidden = true; 
-            cloudface1.hidden = cloudface2.hidden = false; 
+            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = false; 
         });
 
         distance.lt(15).onOff().subscribe(function () {
@@ -83,7 +98,7 @@ function Rainbow() {
             heartEmitter.birthrate = 0;
             heartEmitter.hidden = true;
             likesEmitter.hidden = false; 
-            cloudface1.hidden = cloudface2.hidden = true; 
+            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = true; 
         });
     }
 
@@ -91,7 +106,7 @@ function Rainbow() {
 
         if(distance.lastValue < 0.3) {    
             Diagnostics.log("KISS Dist: " + distance.lastValue);
-        }else{
+        } else{
             Diagnostics.log("Friend Zone: " + distance.lastValue);
         }
     });
