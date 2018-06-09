@@ -30,8 +30,15 @@ heartEmitter.transform.x = MidBetwenPersons.x;
 heartEmitter.transform.y = MidBetwenPersons.y;
 heartEmitter.transform.z = MidBetwenPersons.z;
 
-progress0.transform.scaleX = distance.neg().mul(3).add(1.1).mul(0.5);
-progress1.transform.scaleX = distance.neg().mul(3).add(1.1).neg().mul(0.5);
+FaceTracking.count.lt(2).onOn().subscribe(function() {
+    progress0.transform.scaleX = 0;
+    progress1.transform.scaleX = 0;
+});
+
+FaceTracking.count.ge(2).onOn().subscribe(function() {
+progress0.transform.scaleX = distance.neg().mul(0.03).add(1.1).mul(0.5);
+progress1.transform.scaleX = distance.neg().mul(0.03).add(1.1).neg().mul(0.5);
+});
 
 function Rainbow() {
     this.heartFlex = Scene.root.find('heartFlex');
@@ -46,13 +53,6 @@ function Rainbow() {
     }
 
     this.trackDistance = function(context){
-        Time.ms.monitor().subscribe(function () {
-            if(distance.lastValue < 15) {    
-                Diagnostics.log("KISS Dist: " + distance.lastValue);
-            }else{
-                Diagnostics.log("Friend Zone: " + distance.lastValue);
-            }
-        });
 
         context.heartFlex.hidden = distance.ge(15);
         distance.lt(15).onOn().subscribe(function () {
