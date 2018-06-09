@@ -85,7 +85,8 @@ function Rainbow() {
 
         context.firingHeart();
         heartGroup.hidden = true;
-        daystillparade.hidden = cloudface0.hidden = cloudface1.hidden = true;
+        // daystillparade.hidden = 
+        cloudface0.hidden = cloudface1.hidden = true;
     }
 
     this.countFace = function(context){
@@ -132,7 +133,8 @@ function Rainbow() {
             // heartEmitter.birthrate = 7;
             heartGroup.hidden = false;
             likesEmitter.hidden = true; 
-            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = false; 
+            cloudface0.hidden = cloudface1.hidden = false;
+            //daystillparade.hidden = false; 
         });
 
         distance.lt(10).onOff().subscribe(function () {
@@ -140,7 +142,8 @@ function Rainbow() {
             // heartEmitter.birthrate = 0;
             heartGroup.hidden = true;
             likesEmitter.hidden = false; 
-            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = true; 
+            cloudface0.hidden = cloudface1.hidden = true;
+            //daystillparade.hidden = true; 
         });
     }
 
