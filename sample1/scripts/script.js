@@ -22,12 +22,38 @@ const cloudface1 = Scene.root.find('cloud_face1');
 
 const heartEmitter = Scene.root.find('heartEmitter');
 const likesEmitter = Scene.root.find('likesEmitter');
+const heartModel = Scene.root.find('Heart1');
 
 const mouthXDist = mouth0.x.sub(mouth1.x);
 const mouthYDist = mouth0.y.sub(mouth1.y);
 const mouthZDist = mouth0.z.sub(mouth1.z);
-const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).add(mouthZDist.pow(2)).pow(0.5);
+const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).pow(0.5);
+// const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).add(mouthZDist.pow(2)).pow(0.5);
 const MidBetwenPersons = Reactive.point(mouth0.x.add(mouth1.x).div(2),mouth0.y.add(mouth1.y).div(2),mouth0.z.add(mouth1.z).div(2));
+
+//for heart
+
+const heartGroup = Scene.root.find('heartGroup');
+const hList = [
+    Scene.root.find('Heart1'),
+    Scene.root.find('Heart2'),
+    Scene.root.find('Heart3'),
+    Scene.root.find('Heart4'),
+    Scene.root.find('Heart5')
+];
+
+const hMatL = [
+    Materials.get('heartMat1'),
+    Materials.get('heartMat2'),
+    Materials.get('heartMat3'),
+    Materials.get('heartMat4'),
+    Materials.get('heartMat5')
+];
+const hDr = [,,,,];
+
+const hSsampler = Animation.samplers.linear(0,20);
+const hRotSsampler = Animation.samplers.linear(0,Math.PI);
+const hOpSsampler = Animation.samplers.linear(1,0);
 
 
 function Rainbow() {
@@ -41,8 +67,8 @@ function Rainbow() {
         var context = this; 
         context.trackDistance(context); 
         context.countFace(context);
-        context.firingHeart(context,context.heartEDriver, context.heartESampler, context.faceSignalY, context.faceSignalY2);
-        heartEmitter.hidden = true;
+        context.firingHeart();
+        heartGroup.hidden = true;
         likesEmitter.hidden = false;
     }
 
@@ -58,43 +84,49 @@ function Rainbow() {
         });
     }
 
-    this.firingHeart = function(context, driver, sampler, signalY, signalY2){
-        heartEmitter.transform.x = MidBetwenPersons.x;
-        heartEmitter.transform.y = MidBetwenPersons.y;
-        heartEmitter.transform.z = MidBetwenPersons.z;
-
+    var test = 0;
+    this.firingHeart = function(){
+        // heartEmitter.transform.x = MidBetwenPersons.x;
+        // heartEmitter.transform.y = MidBetwenPersons.y;
+        // heartEmitter.transform.z = MidBetwenPersons.z;
+        test++;
         var scaleFactor = 3; 
-        heartEmitter.transform.rotationX = signalY2.sub(signalY).mul(scaleFactor);
-    }
 
+        
+        for(var i = 0; i < 5; i++) {
+            (function (hindex) {
+                hDr[hindex] = Animation.timeDriver({durationMilliseconds : 2000, loopCount: Infinity, mirror: false});
+                hList[hindex].transform.x = MidBetwenPersons.x.add((Math.random()-0.5)*1);
+                hList[hindex].transform.y = MidBetwenPersons.y.add(Animation.animate(hDr[hindex],hSsampler));
+                hList[hindex].transform.z = MidBetwenPersons.z;
+                hList[hindex].transform.rotationY = Animation.animate(hDr[hindex],hRotSsampler);
+                hMatL[hindex].opacity = Animation.animate(hDr[hindex],hOpSsampler);
+                Time.setTimeout(function() {
+                    hDr[hindex].start();
+                },(Math.random()*2000));
+            })(i);
+        }
+        //heartEmitter.transform.rotationX = signalY2.sub(signalY).mul(scaleFactor);
+    }
     this.trackDistance = function(context){
 
-        context.heartFlex.hidden = distance.ge(15);
-        distance.lt(15).onOn().subscribe(function () {
+        context.heartFlex.hidden = distance.ge(10);
+        distance.lt(10).onOn().subscribe(function () {
             Diagnostics.log("KISS!!!");
-            heartEmitter.birthrate = 7;
-            heartEmitter.hidden = false;
+            // heartEmitter.birthrate = 7;
+            heartGroup.hidden = false;
             likesEmitter.hidden = true; 
-            cloudface1.hidden = cloudface2.hidden = false; 
+            cloudface0.hidden = cloudface1.hidden = false; 
         });
 
-        distance.lt(15).onOff().subscribe(function () {
+        distance.lt(10).onOff().subscribe(function () {
             Diagnostics.log("GO AWAY!!!");
-            heartEmitter.birthrate = 0;
-            heartEmitter.hidden = true;
+            // heartEmitter.birthrate = 0;
+            heartGroup.hidden = true;
             likesEmitter.hidden = false; 
-            cloudface1.hidden = cloudface2.hidden = true; 
+            cloudface0.hidden = cloudface1.hidden = true; 
         });
     }
-
-    Time.ms.monitor().subscribe(function () {
-
-        if(distance.lastValue < 0.3) {    
-            Diagnostics.log("KISS Dist: " + distance.lastValue);
-        }else{
-            Diagnostics.log("Friend Zone: " + distance.lastValue);
-        }
-    });
 }
 var friends = new Rainbow(); 
 friends.init(); 
