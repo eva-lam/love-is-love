@@ -8,6 +8,7 @@ const Reactive = require('Reactive');
 const Diagnostics = require('Diagnostics');
 const Time = require('Time');
 const Audio = require('Audio'); 
+const Instruction = require('Instructions');
 
 const progress0 = Scene.root.find("progress0");
 const progress1 = Scene.root.find("progress1");
@@ -26,30 +27,42 @@ const mouthZDist = mouth0.z.sub(mouth1.z);
 const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).add(mouthZDist.pow(2)).pow(0.5);
 const MidBetwenPersons = Reactive.point(mouth0.x.add(mouth1.x).div(2),mouth0.y.add(mouth1.y).div(2),mouth0.z.add(mouth1.z).div(2));
 
-heartEmitter.transform.x = MidBetwenPersons.x;
-heartEmitter.transform.y = MidBetwenPersons.y;
-heartEmitter.transform.z = MidBetwenPersons.z;
-
-FaceTracking.count.lt(2).onOn().subscribe(function() {
-    progress0.transform.scaleX = 0;
-    progress1.transform.scaleX = 0;
-});
-
-FaceTracking.count.ge(2).onOn().subscribe(function() {
-progress0.transform.scaleX = distance.neg().mul(0.03).add(1.1).mul(0.5);
-progress1.transform.scaleX = distance.neg().mul(0.03).add(1.1).neg().mul(0.5);
-});
 
 function Rainbow() {
     this.heartFlex = Scene.root.find('heartFlex');
     this.heartEDriver = Animation.timeDriver({durationMilliseconds:1500,loopCount:Infinity});
     this.heartESampler = Animation.samplers.linear(0,1); 
+    this.faceSignalY = FaceTracking.face(0).cameraTransform.y.expSmooth(100); 
+    this.faceSignalY2 = FaceTracking.face(0).cameraTransform.y.expSmooth(96); 
 
     this.init= function(){
         var context = this; 
         context.trackDistance(context); 
+        context.countFace(context);
+        context.firingHeart(context,context.heartEDriver, context.heartESampler, context.faceSignalY, context.faceSignalY2);
         heartEmitter.hidden = true;
         likesEmitter.hidden = false;
+    }
+
+    this.countFace = function(context){
+        FaceTracking.count.lt(2).onOn().subscribe(function() {
+            progress0.transform.scaleX = 0;
+            progress1.transform.scaleX = 0;
+        });
+        
+        FaceTracking.count.ge(2).onOn().subscribe(function() {
+             progress0.transform.scaleX = distance.neg().mul(0.03).add(1.1).mul(0.5);
+             progress1.transform.scaleX = distance.neg().mul(0.03).add(1.1).neg().mul(0.5);
+        });
+    }
+
+    this.firingHeart = function(context, driver, sampler, signalY, signalY2){
+        heartEmitter.transform.x = MidBetwenPersons.x;
+        heartEmitter.transform.y = MidBetwenPersons.y;
+        heartEmitter.transform.z = MidBetwenPersons.z;
+
+        var scaleFactor = 3; 
+        heartEmitter.transform.rotationX = signalY2.sub(signalY).mul(scaleFactor);
     }
 
     this.trackDistance = function(context){
