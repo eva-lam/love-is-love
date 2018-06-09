@@ -8,6 +8,7 @@ const Reactive = require('Reactive');
 const Diagnostics = require('Diagnostics');
 const Time = require('Time');
 const Audio = require('Audio'); 
+const Instruction = require('Instructions');
 
 const progress0 = Scene.root.find("progress0");
 const progress1 = Scene.root.find("progress1");
@@ -19,11 +20,28 @@ const mouth1 = face1.cameraTransform.applyTo(face1.mouth.center).expSmooth(200);
 
 const rainbowP0 = face0.cameraTransform.applyTo(Reactive.point(0,20,0)).expSmooth(200);
 const rainbowP1 = face1.cameraTransform.applyTo(Reactive.point(0,20,0)).expSmooth(200);
+
 const cloudface0 = Scene.root.find('cloud_face0');
 const cloudface1 = Scene.root.find('cloud_face1');
 
 const heartEmitter = Scene.root.find('heartEmitter');
 const likesEmitter = Scene.root.find('likesEmitter');
+
+const daystillparade = Scene.root.find('text0');
+
+function DayDiff(CurrentDate)
+{
+	var TYear=CurrentDate.getFullYear();
+        var TDay=new Date("July, 7, 2018");
+        TDay.getFullYear(TYear);
+        var DayCount=(TDay-CurrentDate)/(1000*60*60*24);
+        DayCount=Math.round(DayCount); 
+    return(DayCount);
+}
+
+var Today = new Date(); 
+daystillparade.text = DayDiff(Today) + ' days untill the parade.';
+
 
 const mouthXDist = mouth0.x.sub(mouth1.x);
 const mouthYDist = mouth0.y.sub(mouth1.y);
@@ -33,12 +51,30 @@ const headRainbowXDist = rainbowP0.x.sub(rainbowP1.x);
 const headRainbowYDist = rainbowP0.y.sub(rainbowP1.y);
 const headRainbowZDist = rainbowP0.z.sub(rainbowP1.z);
 
-const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).add(mouthZDist.pow(2)).pow(0.5);
+const distance = mouthXDist.pow(2).add(mouthYDist.pow(2)).pow(0.5);
 const MidBetwenPersons = Reactive.point(mouth0.x.add(mouth1.x).div(2),mouth0.y.add(mouth1.y).div(2),mouth0.z.add(mouth1.z).div(2));
 
-heartEmitter.transform.x = MidBetwenPersons.x;
-heartEmitter.transform.y = MidBetwenPersons.y;
-heartEmitter.transform.z = MidBetwenPersons.z;
+const heartGroup = Scene.root.find('heartGroup');
+const hList = [
+    Scene.root.find('Heart1'),
+    Scene.root.find('Heart2'),
+    Scene.root.find('Heart3'),
+    Scene.root.find('Heart4'),
+    Scene.root.find('Heart5')
+];
+
+const hMatL = [
+    Materials.get('heartMat1'),
+    Materials.get('heartMat2'),
+    Materials.get('heartMat3'),
+    Materials.get('heartMat4'),
+    Materials.get('heartMat5')
+];
+const hDr = [,,,,];
+
+const hSsampler = Animation.samplers.linear(0,20);
+const hRotSsampler = Animation.samplers.linear(0,Math.PI);
+const hOpSsampler = Animation.samplers.linear(1,0);
 
 FaceTracking.count.lt(2).onOn().subscribe(function() {
     progress0.transform.scaleX = 0;
@@ -99,7 +135,7 @@ function Rainbow() {
     this.init= function(){
         var context = this; 
         context.trackDistance(context); 
-        heartEmitter.hidden = true;
+        heartGroup.hidden = false;
         likesEmitter.hidden = false;
     }
 
@@ -109,17 +145,17 @@ function Rainbow() {
         distance.lt(15).onOn().subscribe(function () {
             Diagnostics.log("KISS!!!");
             heartEmitter.birthrate = 7;
-            heartEmitter.hidden = false;
+            heartGroup.hidden = false;
             likesEmitter.hidden = true; 
-            cloudface0.hidden = cloudface1.hidden = false; 
+            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = false;  
         });
 
         distance.lt(15).onOff().subscribe(function () {
             Diagnostics.log("GO AWAY!!!");
             heartEmitter.birthrate = 0;
-            heartEmitter.hidden = true;
+            heartGroup.hidden = true;
             likesEmitter.hidden = false; 
-            cloudface0.hidden = cloudface1.hidden = true; 
+            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = true; 
         });
     }
 
@@ -134,4 +170,3 @@ function Rainbow() {
 }
 var friends = new Rainbow(); 
 friends.init(); 
-
