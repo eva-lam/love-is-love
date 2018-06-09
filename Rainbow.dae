@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<COLLADA xmlns="http://www.collada.org/2008/03/COLLADASchema" version="1.5.0">
+	<asset>
+		<contributor>
+			<authoring_tool>CINEMA4D 18.057 COLLADA Exporter</authoring_tool>
+		</contributor>
+		<created>2018-06-08T20:40:13Z</created>
+		<modified>2018-06-08T20:40:13Z</modified>
+		<unit meter="0.01" name="centimeter"/>
+		<up_axis>Y_UP</up_axis>
+	</asset>
+	<library_images>
+		<image id="ID3">
+			<init_from>
+				<ref>file:///Users/alesandra/Documents/Hacker_Cats/Rainbow/C4D/tex/ranbow.png</ref>
+			</init_from>
+		</image>
+	</library_images>
+	<library_effects>
+		<effect id="ID2">
+			<profile_COMMON>
+				<newparam sid="ID4">
+					<sampler2D>
+						<instance_image url="#ID3"/>
+					</sampler2D>
+				</newparam>
+				<technique sid="COMMON">
+					<blinn>
+						<diffuse>
+							<texture texture="ID4" texcoord="UVSET0"/>
+						</diffuse>
+					</blinn>
+				</technique>
+			</profile_COMMON>
+		</effect>
+	</library_effects>
+	<library_materials>
+		<material id="ID1" name="Mat">
+			<instance_effect url="#ID2"/>
+		</material>
+	</library_materials>
+	<library_geometries>
+		<geometry id="ID8">
+			<mesh>
+				<source id="ID9">
+					<float_array id="ID10" count="138" digits="2490374">-1.56262 2.64068e-24 20 1.56262 -2.64068e-24 20 -1.56262 2.64068e-24 18.1818 1.56262 -2.64068e-24 18.1818 -1.56262 2.07392e-24 16.3636 1.56262 -2.07392e-24 16.3636 -1.56262 -2.22045e-16 14.5455 1.56262 -2.22045e-16 14.5455 -1.56262 1.97041e-24 12.7273 1.56262 -1.97041e-24 12.7273 -1.56262 5.14978e-25 10.9091 1.56262 -5.14978e-25 10.9091 -1.56262 -2.26276e-24 9.09091 1.56262 2.26276e-24 9.09091 -1.56262 -3.63899e-18 7.27273 1.56262 -3.63899e-18 7.27273 -1.56262 -5.55112e-17 5.45455 1.56262 -5.55112e-17 5.45455 -1.56262 -8.15672e-25 3.63636 1.56262 8.15672e-25 3.63636 -1.56262 -5.92486e-17 1.81818 1.56262 -5.92486e-17 1.81818 -1.56262 -5.60946e-17 3.55271e-15 1.56262 -5.60946e-17 3.55271e-15 -1.56262 -2.39549e-24 -1.81818 1.56262 2.39549e-24 -1.81818 -1.56262 -1.38778e-17 -3.63636 1.56262 -1.38778e-17 -3.63636 -1.56262 6.93889e-18 -5.45455 1.56262 6.9389e-18 -5.45455 -1.56262 1.38778e-17 -7.27273 1.56262 1.38778e-17 -7.27273 -1.56262 1.30898e-18 -9.09091 1.56262 1.30898e-18 -9.09091 -1.56262 4.16334e-17 -10.9091 1.56262 4.16334e-17 -10.9091 -1.56262 1.92608e-32 -12.7273 1.56262 -1.92608e-32 -12.7273 -1.56262 -3.03577e-18 -14.5455 1.56262 -3.03577e-18 -14.5455 -1.56262 6.93889e-18 -16.3636 1.56262 6.93889e-18 -16.3636 -1.56262 -1.92608e-32 -18.1818 1.56262 1.92608e-32 -18.1818 -1.56262 -1.92608e-32 -20 1.56262 1.92608e-32 -20</float_array>
+					<technique_common>
+						<accessor count="46" source="#ID10" stride="3">
+							<param name="X" type="float"/>
+							<param name="Y" type="float"/>
+							<param name="Z" type="float"/>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="ID11">
+					<float_array id="ID12" count="69" digits="2490374">1.6899e-24 1 -0 1.59923e-24 1 3.08149e-32 1.08608e-24 1 -6.10623e-17 3.31801e-25 1 -3.30872e-23 3.97631e-25 1 6.10623e-17 1.18009e-25 1 2.46519e-32 -8.41797e-25 1 -1.00072e-18 -7.60682e-25 1 -1.52656e-17 -1.98508e-25 1 1.00072e-18 -7.12787e-25 1 -1.02781e-18 -1.76984e-24 1 -1.5426e-17 -1.58641e-24 1 1.62934e-17 -1.20375e-24 1 1.16096e-17 -1.23021e-24 1 1.9082e-18 -8.20499e-25 1 7.63278e-18 -2.64677e-25 1 -1.54823e-18 0 1 7.63278e-18 0 1 -3.59971e-19 3.08149e-33 1 -1.2284e-17 3.08149e-33 1 1.9082e-18 -3.11822e-33 1 8.34837e-19 -9.2812e-33 1 -1.9082e-18 -1.2326e-32 1 -0</float_array>
+					<technique_common>
+						<accessor count="23" source="#ID12" stride="3">
+							<param name="X" type="float"/>
+							<param name="Y" type="float"/>
+							<param name="Z" type="float"/>
+						</accessor>
+					</technique_common>
+				</source>
+				<source id="ID13">
+					<float_array id="ID14" count="92" digits="2490374">0.0333868 0.00277972 0.0333868 0.0479815 0.966613 0.0479815 0.966613 0.00277972 0.0333868 0.0931834 0.966613 0.0931834 0.0333868 0.138385 0.966613 0.138385 0.0333868 0.183587 0.966613 0.183587 0.0333868 0.228789 0.966613 0.228789 0.0333868 0.273991 0.966613 0.273991 0.0333868 0.319193 0.966613 0.319193 0.0333868 0.364394 0.966613 0.364394 0.0333868 0.409596 0.966613 0.409596 0.0333868 0.454798 0.966613 0.454798 0.0333868 0.5 0.966613 0.5 0.0333868 0.545202 0.966613 0.545202 0.0333868 0.590404 0.966613 0.590404 0.0333868 0.635606 0.966613 0.635606 0.0333868 0.680807 0.966613 0.680807 0.0333868 0.726009 0.966613 0.726009 0.0333868 0.771211 0.966613 0.771211 0.0333868 0.816413 0.966613 0.816413 0.0333868 0.861615 0.966613 0.861615 0.0333868 0.906817 0.966613 0.906817 0.0333868 0.952018 0.966613 0.952018 0.0333868 0.99722 0.966613 0.99722</float_array>
+					<technique_common>
+						<accessor count="46" source="#ID14" stride="2">
+							<param name="S" type="float"/>
+							<param name="T" type="float"/>
+						</accessor>
+					</technique_common>
+				</source>
+				<vertices id="ID15">
+					<input semantic="POSITION" source="#ID9"/>
+				</vertices>
+				<polylist count="22" material="Material1">
+					<input offset="0" semantic="VERTEX" source="#ID15" set="0"/>
+					<input offset="1" semantic="NORMAL" source="#ID11" set="0"/>
+					<input offset="2" semantic="TEXCOORD" source="#ID13" set="0"/>
+					<vcount>4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4</vcount>
+					<p>1 0 3 3 1 2 2 1 1 0 0 0 3 1 2 5 2 5 4 2 4 2 1 1 5 2 5 7 3 7 6 3 6 4 2 4 7 3 7 9 4 9 8 4 8 6 3 6 9 4 9 11 5 11 10 5 10 8 4 8 11 5 11 13 6 13 12 6 12 10 5 10 13 6 13 15 7 15 14 7 14 12 6 12 15 7 15 17 8 17 16 8 16 14 7 14 17 8 17 19 9 19 18 9 18 16 8 16 19 9 19 21 10 21 20 10 20 18 9 18 21 10 21 23 11 23 22 11 22 20 10 20 23 11 23 25 12 25 24 12 24 22 11 22 25 12 25 27 13 27 26 13 26 24 12 24 27 13 27 29 14 29 28 14 28 26 13 26 29 14 29 31 15 31 30 15 30 28 14 28 31 15 31 33 16 33 32 16 32 30 15 30 33 16 33 35 17 35 34 17 34 32 16 32 35 17 35 37 18 37 36 18 36 34 17 34 37 18 37 39 19 39 38 19 38 36 18 36 39 19 39 41 20 41 40 20 40 38 19 38 41 20 41 43 21 43 42 21 42 40 20 40 43 21 43 45 22 45 44 22 44 42 21 42</p>
+				</polylist>
+			</mesh>
+		</geometry>
+	</library_geometries>
+	<library_visual_scenes>
+		<visual_scene id="ID5">
+			<node id="ID6" name="Plane.1">
+				<translate sid="translate">0 0 16.3363</translate>
+				<rotate sid="rotateY">0 1 0 -0</rotate>
+				<rotate sid="rotateX">1 0 0 0</rotate>
+				<rotate sid="rotateZ">0 0 1 -90</rotate>
+				<scale sid="scale">1 1 1</scale>
+				<node id="ID7" name="Plane">
+					<translate sid="translate">0 0 -0</translate>
+					<rotate sid="rotateY">0 1 0 -0</rotate>
+					<rotate sid="rotateX">1 0 0 0</rotate>
+					<rotate sid="rotateZ">0 0 1 -0</rotate>
+					<scale sid="scale">1 1 1</scale>
+					<instance_geometry url="#ID8">
+						<bind_material>
+							<technique_common>
+								<instance_material symbol="Material1" target="#ID1">
+									<bind_vertex_input semantic="UVSET0" input_semantic="TEXCOORD" input_set="0"/>
+								</instance_material>
+							</technique_common>
+						</bind_material>
+					</instance_geometry>
+				</node>
+			</node>
+			<node id="ID16" name="Root_Rainbow">
+				<translate sid="translate">0 0 -0</translate>
+				<rotate sid="rotateY">0 1 0 -0</rotate>
+				<rotate sid="rotateX">1 0 0 0</rotate>
+				<rotate sid="rotateZ">0 0 1 -0</rotate>
+				<scale sid="scale">1 1 1</scale>
+				<node id="ID17" name="Joint" sid="joint1" type="JOINT">
+					<translate sid="translate">0 0 -3.72287</translate>
+					<rotate sid="rotateY">0 1 0 180.449</rotate>
+					<rotate sid="rotateX">1 0 0 0</rotate>
+					<rotate sid="rotateZ">0 0 1 -0</rotate>
+					<scale sid="scale">1 1 1</scale>
+					<node id="ID18" name="Joint.1" sid="joint2" type="JOINT">
+						<translate sid="translate">3.53884e-16 0 -2</translate>
+						<rotate sid="rotateY">0 1 0 0.70137</rotate>
+						<rotate sid="rotateX">1 0 0 0</rotate>
+						<rotate sid="rotateZ">0 0 1 -0</rotate>
+						<scale sid="scale">1 1 1</scale>
+						<node id="ID19" name="Joint.2" sid="joint3" type="JOINT">
+							<translate sid="translate">1.44329e-15 0 -2</translate>
+							<rotate sid="rotateY">0 1 0 358.505</rotate>
+							<rotate sid="rotateX">1 0 0 0</rotate>
+							<rotate sid="rotateZ">0 0 1 -0</rotate>
+							<scale sid="scale">1 1 1</scale>
+							<node id="ID20" name="Joint.3" sid="joint4" type="JOINT">
+								<translate sid="translate">1.38778e-17 0 -2</translate>
+								<rotate sid="rotateY">0 1 0 359.144</rotate>
+								<rotate sid="rotateX">1 0 0 0</rotate>
+								<rotate sid="rotateZ">0 0 1 -0</rotate>
+								<scale sid="scale">1 1 1</scale>
+								<node id="ID21" name="Joint.4" sid="joint5" type="JOINT">
+									<translate sid="translate">-1.11022e-16 -3.29269e-10 -2</translate>
+									<rotate sid="rotateY">0 1 0 2.52979</rotate>
+									<rotate sid="rotateX">1 0 0 0</rotate>
+									<rotate sid="rotateZ">0 0 1 -0</rotate>
+									<scale sid="scale">1 1 1</scale>
+									<node id="ID22" name="Joint.5" sid="joint6" type="JOINT">
+										<translate sid="translate">-1.27676e-15 3.10193e-25 -2</translate>
+										<rotate sid="rotateY">0 1 0 358.198</rotate>
+										<rotate sid="rotateX">1 0 0 0</rotate>
+										<rotate sid="rotateZ">0 0 1 -0</rotate>
+										<scale sid="scale">1 1 1</scale>
+										<node id="ID23" name="Joint.6" sid="joint7" type="JOINT">
+											<translate sid="translate">1.66533e-16 -1.55096e-25 -2</translate>
+											<rotate sid="rotateY">0 1 0 0.91621</rotate>
+											<rotate sid="rotateX">1 0 0 0</rotate>
+											<rotate sid="rotateZ">0 0 1 -360</rotate>
+											<scale sid="scale">1 1 1</scale>
+											<node id="ID24" name="Joint.7" sid="joint8" type="JOINT">
+												<translate sid="translate">2.35922e-16 -6.35655e-15 -2</translate>
+												<rotate sid="rotateY">0 1 0 359.347</rotate>
+												<rotate sid="rotateX">1 0 0 -9.73051e-09</rotate>
+												<rotate sid="rotateZ">0 0 1 -0</rotate>
+												<scale sid="scale">1 1 1</scale>
+												<node id="ID25" name="Joint.8" sid="joint9" type="JOINT">
+													<translate sid="translate">2.15106e-16 -6.18571e-15 -2</translate>
+													<rotate sid="rotateY">0 1 0 359.83</rotate>
+													<rotate sid="rotateX">1 0 0 -2.53284e-09</rotate>
+													<rotate sid="rotateZ">0 0 1 -0</rotate>
+													<scale sid="scale">1 1 1</scale>
+													<node id="ID26" name="Joint.9" sid="joint10" type="JOINT">
+														<translate sid="translate">2.91434e-16 -4.34559e-14 -2</translate>
+														<rotate sid="rotateY">0 1 0 0.935573</rotate>
+														<rotate sid="rotateX">1 0 0 1.39395e-08</rotate>
+														<rotate sid="rotateZ">0 0 1 -0</rotate>
+														<scale sid="scale">1 1 1</scale>
+														<node id="ID27" name="Joint.10" sid="joint11" type="JOINT">
+															<translate sid="translate">-1.38778e-15 1.36143e-14 -2</translate>
+															<rotate sid="rotateY">0 1 0 358.842</rotate>
+															<rotate sid="rotateX">1 0 0 -1.72444e-08</rotate>
+															<rotate sid="rotateZ">0 0 1 -0</rotate>
+															<scale sid="scale">1 1 1</scale>
+															<node id="ID28" name="Joint.11" sid="joint12" type="JOINT">
+																<translate sid="translate">-1.249e-15 -8.87958e-14 -2</translate>
+																<rotate sid="rotateY">0 1 0 0.89298</rotate>
+																<rotate sid="rotateX">1 0 0 1.33005e-08</rotate>
+																<rotate sid="rotateZ">0 0 1 -0</rotate>
+																<scale sid="scale">1 1 1</scale>
+																<node id="ID29" name="Joint.12" sid="joint13" type="JOINT">
+																	<translate sid="translate">6.52256e-16 1.3208e-15 -2</translate>
+																	<rotate sid="rotateY">0 1 0 0.216829</rotate>
+																	<rotate sid="rotateX">1 0 0 3.22931e-09</rotate>
+																	<rotate sid="rotateZ">0 0 1 -0</rotate>
+																	<scale sid="scale">1 1 1</scale>
+																	<node id="ID30" name="Joint.13" sid="joint14" type="JOINT">
+																		<translate sid="translate">7.77156e-16 -2.40568e-14 -2</translate>
+																		<rotate sid="rotateY">0 1 0 359.302</rotate>
+																		<rotate sid="rotateX">1 0 0 -1.03908e-08</rotate>
+																		<rotate sid="rotateZ">0 0 1 -0</rotate>
+																		<scale sid="scale">1 1 1</scale>
+																		<node id="ID31" name="Joint.14" sid="joint15" type="JOINT">
+																			<translate sid="translate">3.747e-16 -2.77046e-14 -2</translate>
+																			<rotate sid="rotateY">0 1 0 0.38611</rotate>
+																			<rotate sid="rotateX">1 0 0 5.74993e-09</rotate>
+																			<rotate sid="rotateZ">0 0 1 -0</rotate>
+																			<scale sid="scale">1 1 1</scale>
+																			<node id="ID32" name="Joint.15" sid="joint16" type="JOINT">
+																				<translate sid="translate">-8.88178e-16 -1.20898e-14 -2</translate>
+																				<rotate sid="rotateY">0 1 0 359.566</rotate>
+																				<rotate sid="rotateX">1 0 0 -6.46686e-09</rotate>
+																				<rotate sid="rotateZ">0 0 1 -1.47878e-06</rotate>
+																				<scale sid="scale">1 1 1</scale>
+																				<node id="ID33" name="Joint.16" sid="joint17" type="JOINT">
+																					<translate sid="translate">1.94289e-16 1.94438e-10 -2</translate>
+																					<rotate sid="rotateY">0 1 0 358.508</rotate>
+																					<rotate sid="rotateX">1 0 0 1.4656e-11</rotate>
+																					<rotate sid="rotateZ">0 0 1 -0</rotate>
+																					<scale sid="scale">1 1 1</scale>
+																					<node id="ID34" name="Joint.17" sid="joint18" type="JOINT">
+																						<translate sid="translate">-1.11022e-15 3.12163e-18 -2</translate>
+																						<rotate sid="rotateY">0 1 0 4.66518</rotate>
+																						<rotate sid="rotateX">1 0 0 -4.58509e-11</rotate>
+																						<rotate sid="rotateZ">0 0 1 -0</rotate>
+																						<scale sid="scale">1 1 1</scale>
+																						<node id="ID35" name="Joint.18" sid="joint19" type="JOINT">
+																							<translate sid="translate">-1.77636e-15 -4.09971e-22 -2</translate>
+																							<rotate sid="rotateY">0 1 0 355.433</rotate>
+																							<rotate sid="rotateX">1 0 0 4.47313e-11</rotate>
+																							<rotate sid="rotateZ">0 0 1 -0</rotate>
+																							<scale sid="scale">1 1 1</scale>
+																							<node id="ID36" name="Joint.19" sid="joint20" type="JOINT">
+																								<translate sid="translate">-8.88178e-16 1.81969e-16 -2</translate>
+																								<rotate sid="rotateY">0 1 0 3.38453</rotate>
+																								<rotate sid="rotateX">1 0 0 -3.30778e-11</rotate>
+																								<rotate sid="rotateZ">0 0 1 -0</rotate>
+																								<scale sid="scale">1 1 1</scale>
+																								<node id="ID37" name="Joint.20" sid="joint21" type="JOINT">
+																									<translate sid="translate">2.66454e-15 -4.69903e-16 -2</translate>
+																									<rotate sid="rotateY">0 1 0 1.40334e-14</rotate>
+																									<rotate sid="rotateX">1 0 0 -5.08889e-14</rotate>
+																									<rotate sid="rotateZ">0 0 1 -0</rotate>
+																									<scale sid="scale">1 1 1</scale>
+																								</node>
+																							</node>
+																						</node>
+																					</node>
+																				</node>
+																			</node>
+																		</node>
+																	</node>
+																</node>
+															</node>
+														</node>
+													</node>
+												</node>
+											</node>
+										</node>
+									</node>
+								</node>
+							</node>
+						</node>
+					</node>
+				</node>
+			</node>
+		</visual_scene>
+	</library_visual_scenes>
+	<scene>
+		<instance_visual_scene url="#ID5"/>
+	</scene>
+</COLLADA>
