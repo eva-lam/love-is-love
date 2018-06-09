@@ -17,6 +17,8 @@ const face0 = FaceTracking.face(0);
 const face1 = FaceTracking.face(1);
 const mouth0 = face0.cameraTransform.applyTo(face0.mouth.center).expSmooth(200);
 const mouth1 = face1.cameraTransform.applyTo(face1.mouth.center).expSmooth(200);
+const cloudface0 = Scene.root.find('cloud_face0');
+const cloudface1 = Scene.root.find('cloud_face1');
 
 const heartEmitter = Scene.root.find('heartEmitter');
 const likesEmitter = Scene.root.find('likesEmitter');
@@ -73,6 +75,7 @@ function Rainbow() {
             heartEmitter.birthrate = 7;
             heartEmitter.hidden = false;
             likesEmitter.hidden = true; 
+            cloudface1.hidden = cloudface2.hidden = false; 
         });
 
         distance.lt(15).onOff().subscribe(function () {
@@ -80,6 +83,7 @@ function Rainbow() {
             heartEmitter.birthrate = 0;
             heartEmitter.hidden = true;
             likesEmitter.hidden = false; 
+            cloudface1.hidden = cloudface2.hidden = true; 
         });
     }
 
