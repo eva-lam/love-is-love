@@ -13,13 +13,15 @@ const Instruction = require('Instructions');
 const progress0 = Scene.root.find("progress0");
 const progress1 = Scene.root.find("progress1");
 
+const kissingSound = Scene.root.find('kissingSound');
+
 const face0 = FaceTracking.face(0);
 const face1 = FaceTracking.face(1);
 const mouth0 = face0.cameraTransform.applyTo(face0.mouth.center).expSmooth(200);
 const mouth1 = face1.cameraTransform.applyTo(face1.mouth.center).expSmooth(200);
 
-const rainbowP0 = face0.cameraTransform.applyTo(Reactive.point(0,20,0)).expSmooth(200);
-const rainbowP1 = face1.cameraTransform.applyTo(Reactive.point(0,20,0)).expSmooth(200);
+const rainbowP0 = face0.cameraTransform.applyTo(Reactive.point(0,21,0)).expSmooth(200);
+const rainbowP1 = face1.cameraTransform.applyTo(Reactive.point(0,21,0)).expSmooth(200);
 
 const cloudface0 = Scene.root.find('cloud_face0');
 const cloudface1 = Scene.root.find('cloud_face1');
@@ -76,29 +78,33 @@ const hSsampler = Animation.samplers.linear(0,20);
 const hRotSsampler = Animation.samplers.linear(0,Math.PI);
 const hOpSsampler = Animation.samplers.linear(1,0);
 
-FaceTracking.count.lt(2).onOn().subscribe(function() {
-    progress0.transform.scaleX = 0;
-    progress1.transform.scaleX = 0;
-});
-
-FaceTracking.count.ge(2).onOn().subscribe(function() {
 progress0.transform.scaleX = distance.neg().mul(0.03).add(1.1).mul(0.5);
 progress1.transform.scaleX = distance.neg().mul(0.03).add(1.1).neg().mul(0.5);
-});
 
+// FaceTracking.count.lt(2).onOn().subscribe(function() {
+//     progress0.transform.scaleX = 0;
+//     progress1.transform.scaleX = 0;
+// });
+
+// FaceTracking.count.ge(2).onOn().subscribe(function() {
+// progress0.transform.scaleX = distance.neg().mul(0.03).add(1.1).mul(0.5);
+// progress1.transform.scaleX = distance.neg().mul(0.03).add(1.1).neg().mul(0.5);
+// });
+
+const rainbiwRoot = Scene.root.find('rainbiwRoot');
 const rainbowObj = Scene.root.find('Rainbow0');
 const rainbowPoints = [
-    rainbowObj.child('p0'),
-    rainbowObj.child('p1'),
-    rainbowObj.child('p2'),
-    rainbowObj.child('p3'),
-    rainbowObj.child('p4'),
+    rainbowObj.child('p00'),
+    rainbowObj.child('p01'),
+    rainbowObj.child('p02'),
+    rainbowObj.child('p03'),
+    rainbowObj.child('p04'),
     
-    rainbowObj.child('p5'),
-    rainbowObj.child('p6'),
-    rainbowObj.child('p7'),
-    rainbowObj.child('p8'),
-    rainbowObj.child('p9'),
+    rainbowObj.child('p05'),
+    rainbowObj.child('p07'),
+    rainbowObj.child('p06'),
+    rainbowObj.child('p08'),
+    rainbowObj.child('p09'),
     
     rainbowObj.child('p10'),
     rainbowObj.child('p11'),
@@ -110,23 +116,28 @@ const rainbowPoints = [
     rainbowObj.child('p16'),
     rainbowObj.child('p17'),
     rainbowObj.child('p18'),
-    rainbowObj.child('p19')
+    rainbowObj.child('p19'),
+    rainbowObj.child('p20'),
+    rainbowObj.child('p21'),
+    rainbowObj.child('p22')
 ];
 
+
 function RainbowLineInit() {
-    rainbowObj.transform.x = rainbowP1.x;
-    rainbowObj.transform.y = rainbowP1.y;
-    rainbowObj.transform.z = rainbowP1.z;
+    rainbowObj.transform.x = rainbowP1.x.mul(1);
+    rainbowObj.transform.y = rainbowP1.y.mul(1);
+    rainbowObj.transform.z = rainbowP1.z.mul(1).sub(10);
 
     for(var i = 0; i<rainbowPoints.length;i++) {
         (function (rindex) {
-            rainbowPoints[rindex].transform.x = headRainbowXDist.div(20).mul((rindex));
-            rainbowPoints[rindex].transform.y = headRainbowYDist.div(20).mul((rindex)).add(Math.sin(rindex/20*Math.PI)*10);
-            rainbowPoints[rindex].transform.z = headRainbowZDist.div(20).mul((rindex));
+            rainbowPoints[rindex].transform.x = headRainbowXDist.div(23).mul((rindex));//add(Math.sin(rindex/23*Math.PI)*10);;
+            rainbowPoints[rindex].transform.y = headRainbowYDist.div(23).mul((rindex)).add(Math.sin(rindex/23*Math.PI)*10);
+            rainbowPoints[rindex].transform.z = headRainbowZDist.div(23).mul((rindex));//.sub(Math.sin(rindex/23*Math.PI)*10);;
         })(i);
     }
 }
 RainbowLineInit();
+
 function Rainbow() {
     this.heartFlex = Scene.root.find('heartFlex');
     this.heartEDriver = Animation.timeDriver({durationMilliseconds:1500,loopCount:Infinity});
@@ -135,39 +146,74 @@ function Rainbow() {
     this.init= function(){
         var context = this; 
         context.trackDistance(context); 
-        heartGroup.hidden = false;
+        context.firingHeart();
+        context.setVisibility(daystillparade, false);
+        cloudface0.hidden = cloudface1.hidden = true;
+        rainbiwRoot.hidden = true;
+        heartGroup.hidden = true;
         likesEmitter.hidden = false;
+    }
+    this.setVisibility = function(item,visible){
+        item.hidden = !visible;
+    }
+
+    this.firingHeart = function(){	
+        
+        for(var i = 0; i < 5; i++) {	
+            (function (hindex) {	
+                hDr[hindex] = Animation.timeDriver({durationMilliseconds : 2000, loopCount: Infinity, mirror: false});	
+                hList[hindex].transform.x = MidBetwenPersons.x.add((Math.random()-0.5)*1);	
+                hList[hindex].transform.y = MidBetwenPersons.y.add(Animation.animate(hDr[hindex],hSsampler));	
+                hList[hindex].transform.z = MidBetwenPersons.z;	
+                hList[hindex].transform.rotationY = Animation.animate(hDr[hindex],hRotSsampler);	
+                hMatL[hindex].opacity = Animation.animate(hDr[hindex],hOpSsampler);	
+                Time.setTimeout(function() {	
+                    hDr[hindex].start();	
+                },(Math.random()*2000));	
+            })(i);	
+        }
     }
 
     this.trackDistance = function(context){
 
         context.heartFlex.hidden = distance.ge(15);
-        distance.lt(15).onOn().subscribe(function () {
+        distance.lt(10).onOn({fireOnInitialValue : true}).subscribe(function () {
             Diagnostics.log("KISS!!!");
+            if(FaceTracking.count.lastValue > 1) kissingSound.play();
             heartEmitter.birthrate = 7;
             heartGroup.hidden = false;
             likesEmitter.hidden = true; 
-            cloudface0.hidden = cloudface1.hidden = daystillparade.hidden = false;  
+            rainbiwRoot.hidden = true;
         });
 
-        distance.lt(15).onOff().subscribe(function () {
+        distance.lt(10).onOff({fireOnInitialValue : true}).subscribe(function () {
             Diagnostics.log("GO AWAY!!!");
             heartEmitter.birthrate = 0;
             heartGroup.hidden = true;
-            likesEmitter.hidden = false; 
             cloudface0.hidden = cloudface1.hidden = true;
             //daystillparade.hidden = true; 
         });
+
+        distance.lt(25).onOn({fireOnInitialValue : true}).subscribe(function () {
+            context.setVisibility(daystillparade, true);
+            cloudface0.hidden = cloudface1.hidden = false;  
+            likesEmitter.hidden = true; 
+            rainbiwRoot.hidden = false;
+        });
+
+        distance.lt(25).onOff({fireOnInitialValue : true}).subscribe(function () {
+            context.setVisibility(daystillparade, false);
+            cloudface0.hidden = cloudface1.hidden = true;
+            likesEmitter.hidden = false; 
+            rainbiwRoot.hidden = true;
+        });
+
+        Scene.root.find('EffectGroup').hidden = FaceTracking.count.le(1);
+        Scene.root.find('CamEffG').hidden = FaceTracking.count.le(1);
+        Scene.root.find('FuckIt0').hidden = FaceTracking.count.le(1);
+        Scene.root.find('FuckIt1').hidden = FaceTracking.count.le(1);
+        Scene.root.find('faceCheck').hidden = FaceTracking.count.gt(1);
     }
-
-    Time.ms.monitor().subscribe(function () {
-
-        if(distance.lastValue < 0.3) {    
-            Diagnostics.log("KISS Dist: " + distance.lastValue);
-        }else{
-            Diagnostics.log("Friend Zone: " + distance.lastValue);
-        }
-    });
 }
 var friends = new Rainbow(); 
 friends.init(); 
